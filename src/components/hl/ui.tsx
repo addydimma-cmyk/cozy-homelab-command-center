@@ -56,9 +56,9 @@ export function StatusBadge({ status }: { status: keyof typeof tone }) {
   );
 }
 
-export function UsageBar({ value, max = 100, label, detail }: { value: number; max?: number; label?: string; detail?: string }) {
+export function UsageBar({ value, max = 100, label, detail, positive = false }: { value: number; max?: number; label?: string; detail?: string; positive?: boolean }) {
   const pct = Math.min(100, Math.round((value / max) * 100));
-  const color = pct > 85 ? "bg-destructive" : pct > 70 ? "bg-warning" : "bg-brand";
+  const color = positive ? "bg-brand" : pct > 85 ? "bg-destructive" : pct > 70 ? "bg-warning" : "bg-brand";
   return (
     <div className="space-y-1.5">
       {(label || detail) && (

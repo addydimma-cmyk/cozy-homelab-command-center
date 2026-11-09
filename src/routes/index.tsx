@@ -103,7 +103,7 @@ function Overview() {
         <Panel title="Service uptime (30d)" icon={ShieldCheck}>
           <ul className="space-y-3">
             {services.map((s) => (
-              <li key={s.name}><UsageBar label={s.name} value={s.uptime} detail={`${s.uptime}%`} /></li>
+              <li key={s.name}><UsageBar label={s.name} value={s.uptime} detail={`${s.uptime}%`} positive /></li>
             ))}
           </ul>
         </Panel>

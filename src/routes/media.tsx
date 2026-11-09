@@ -48,7 +48,7 @@ function Media() {
                 <div className="flex justify-between text-xs text-muted-foreground"><span>{s.server} · {s.user}</span><span>{s.transcode ? "Transcode" : "Direct play"}</span></div>
                 <div className="mt-1 font-medium">{s.title}</div>
                 <div className="mb-3 text-xs text-muted-foreground">{s.device} · {s.quality}</div>
-                <UsageBar value={s.progress} />
+                <UsageBar value={s.progress} positive />
               </div>
             ))}
           </div>
