@@ -43,6 +43,13 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
+    // A page file from an older version can disappear after an update; reload once to get the new one.
+    const msg = error instanceof Error ? error.message : String(error);
+    if (/dynamically imported module|Importing a module script failed/i.test(msg) && !sessionStorage.getItem("chunk-reload")) {
+      sessionStorage.setItem("chunk-reload", "1");
+      window.location.reload();
+      return;
+    }
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
@@ -123,6 +130,10 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    const t = setTimeout(() => sessionStorage.removeItem("chunk-reload"), 5000);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
