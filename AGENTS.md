@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Architecture
+- Integrations live in `src/lib/adapters/` behind typed interfaces and are only imported inside `createServerFn` handlers (`src/lib/homelab.functions.ts`) — keeps service credentials server-side.
+- Every management action goes through `ConfirmAction` → `performAction`, which is dry-run until real adapters exist — no unconfirmed or real commands.

@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DockerRouteImport } from './routes/docker'
+import { Route as HomeAssistantRouteImport } from './routes/home-assistant'
+import { Route as MediaRouteImport } from './routes/media'
+import { Route as NetworkRouteImport } from './routes/network'
+import { Route as ProxmoxRouteImport } from './routes/proxmox'
+import { Route as SettingsRouteImport } from './routes/settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DockerRoute = DockerRouteImport.update({
+  id: '/docker',
+  path: '/docker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeAssistantRoute = HomeAssistantRouteImport.update({
+  id: '/home-assistant',
+  path: '/home-assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediaRoute = MediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NetworkRoute = NetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProxmoxRoute = ProxmoxRouteImport.update({
+  id: '/proxmox',
+  path: '/proxmox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docker': typeof DockerRoute
+  '/home-assistant': typeof HomeAssistantRoute
+  '/media': typeof MediaRoute
+  '/network': typeof NetworkRoute
+  '/proxmox': typeof ProxmoxRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docker': typeof DockerRoute
+  '/home-assistant': typeof HomeAssistantRoute
+  '/media': typeof MediaRoute
+  '/network': typeof NetworkRoute
+  '/proxmox': typeof ProxmoxRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/docker': typeof DockerRoute
+  '/home-assistant': typeof HomeAssistantRoute
+  '/media': typeof MediaRoute
+  '/network': typeof NetworkRoute
+  '/proxmox': typeof ProxmoxRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/docker'
+    | '/home-assistant'
+    | '/media'
+    | '/network'
+    | '/proxmox'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/docker'
+    | '/home-assistant'
+    | '/media'
+    | '/network'
+    | '/proxmox'
+    | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/docker'
+    | '/home-assistant'
+    | '/media'
+    | '/network'
+    | '/proxmox'
+    | '/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DockerRoute: typeof DockerRoute
+  HomeAssistantRoute: typeof HomeAssistantRoute
+  MediaRoute: typeof MediaRoute
+  NetworkRoute: typeof NetworkRoute
+  ProxmoxRoute: typeof ProxmoxRoute
+  SettingsRoute: typeof SettingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docker': {
+      id: '/docker'
+      path: '/docker'
+      fullPath: '/docker'
+      preLoaderRoute: typeof DockerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home-assistant': {
+      id: '/home-assistant'
+      path: '/home-assistant'
+      fullPath: '/home-assistant'
+      preLoaderRoute: typeof HomeAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media': {
+      id: '/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof MediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/network': {
+      id: '/network'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proxmox': {
+      id: '/proxmox'
+      path: '/proxmox'
+      fullPath: '/proxmox'
+      preLoaderRoute: typeof ProxmoxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DockerRoute: DockerRoute,
+  HomeAssistantRoute: HomeAssistantRoute,
+  MediaRoute: MediaRoute,
+  NetworkRoute: NetworkRoute,
+  ProxmoxRoute: ProxmoxRoute,
+  SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

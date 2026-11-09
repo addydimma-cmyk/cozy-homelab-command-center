@@ -15,7 +15,11 @@ export const Route = createFileRoute("/")({
     ],
   }),
   loader: ({ context }) =>
-    Promise.all([proxmoxQuery, dockerQuery, networkQuery, mediaQuery].map((q) => context.queryClient.ensureQueryData(q as typeof proxmoxQuery))),
+    Promise.all([
+      context.queryClient.ensureQueryData(proxmoxQuery),
+      context.queryClient.ensureQueryData(dockerQuery),
+      context.queryClient.ensureQueryData(networkQuery),
+    ]),
   pendingComponent: PageSkeleton,
   errorComponent: ({ error, reset }) => <ErrorState error={error} onRetry={reset} />,
   component: Overview,
